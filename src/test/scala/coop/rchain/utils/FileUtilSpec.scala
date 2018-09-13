@@ -13,7 +13,7 @@ class FileUtilSpec extends Specification {
     val filename = Globals.appCfg.getString("contract.file.name")
     println(s"contract file name is: ${filename}")
 
-    val computed = fileFromClasspath( "/rho/rsong.rho")
+    val computed = fileFromClasspath("/rho/rsong.rho")
     println(s"contract is: ${computed}")
 
     computed.isRight === true

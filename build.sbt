@@ -1,10 +1,17 @@
 import CompilerSettings._
 
-lazy val root = (project in file("."))
-  .settings(
+lazy val projectSettings = Seq(
     organization := "coop.rchain",
     name := "rsong-acquisition",
     scalaVersion := "2.12.6",
+    scalafmtOnCompile := true
+  )
+
+lazy val commonSettings = projectSettings ++ CompilerSettings.options
+
+lazy val root = (project in file("."))
+  .settings(projectSettings)
+  .settings(
     libraryDependencies ++= {
       object V {
         val http4s = "0.19.0-M1"
@@ -18,12 +25,8 @@ lazy val root = (project in file("."))
         val catsEffect="1.0.0-RC3"
       }
       Seq(
+        "org.typelevel" %% "cats-effect" % "1.0.0",
        "io.monix" %% "monix" % "3.0.0-RC1" ,
-        // "org.typelevel" %% "cats-effect" % V.catsEffect,
-
-       "org.http4s" %% "http4s-dsl" % V.http4s,
-       "org.http4s" %% "http4s-blaze-server" % V.http4s,
-        "org.http4s" %% "http4s-circe" % V.http4s,
         "io.circe" %% "circe-core" % V.circie,
         "io.circe" %% "circe-generic" % V.circie,
         "io.circe" %% "circe-parser" % V.circie,
@@ -36,6 +39,9 @@ lazy val root = (project in file("."))
         "com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion,
         "ch.qos.logback" % "logback-classic" % V.logback
       )})
+
+scalacOptions in Compile ++= CompilerSettings.options
+
 PB.targets in Compile := Seq(
   scalapb.gen() -> (sourceManaged in Compile).value)
 

@@ -38,7 +38,8 @@ object Bootstrap extends IOApp {
     }
   }
 
-  lazy val proxy = RholangProxy("localhost", 40401)
+  // lazy val proxy = RholangProxy("localhost", 40401)
+  lazy val proxy = RholangProxy(Globals.appCfg.getString("grpc.host"), 40401)
 
   def aquireAssets(path: String) = {
     val ret =
@@ -91,10 +92,10 @@ object Bootstrap extends IOApp {
   def loadeAsset(assetId: String,
                  assetPath: String,
                  metadata: SongMetadata): Either[Err, String] = {
-    val ret = RSongJsonAsset(
-      id = assetId,
-      assetData = asHexConcatRsong(s"$assetPath").toOption.get,
-      jsonData = metadata.asJson.toString)
+    val ret = RSongJsonAsset(id = assetId,
+                             assetData =
+                               asHexConcatRsong(s"$assetPath").toOption.get,
+                             jsonData = metadata.asJson.toString)
     (asRholang _ andThen proxy.deploy _)(ret)
   }
 
