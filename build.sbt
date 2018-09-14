@@ -3,36 +3,32 @@ import CompilerSettings._
 lazy val projectSettings = Seq(
     organization := "coop.rchain",
     name := "rsong-acquisition",
-    scalaVersion := "2.12.6",
-    scalafmtOnCompile := true
+    scalaVersion := "2.12.6"
   )
 
-lazy val commonSettings = projectSettings ++ CompilerSettings.options
-
 lazy val root = (project in file("."))
-  .settings(projectSettings)
+  .settings(projectSettings: _*)
   .settings(
     libraryDependencies ++= {
       object V {
-        val http4s = "0.19.0-M1"
         val specs2 = "4.2.0"
         val logback = "1.2.3"
         val scalalogging = "3.9.0"
         val config = "1.3.3"
         val scalapb= "0.7.4"
-        val dropbox="3.0.8"
         val circie="0.9.3"
-        val catsEffect="1.0.0-RC3"
+        val catsEffect="1.0.0"
+        val monix="3.0.0-RC1"
       }
       Seq(
-        "org.typelevel" %% "cats-effect" % "1.0.0",
-       "io.monix" %% "monix" % "3.0.0-RC1" ,
+        "org.specs2" %% "specs2-core" % V.specs2 % "test",
+        "org.typelevel" %% "cats-effect" % V.catsEffect,
+       "io.monix" %% "monix" % V.monix ,
         "io.circe" %% "circe-core" % V.circie,
         "io.circe" %% "circe-generic" % V.circie,
         "io.circe" %% "circe-parser" % V.circie,
-        "org.specs2" %% "specs2-core" % V.specs2 % "test",
         "com.typesafe" %  "config" % V.config,
-        "com.typesafe.scala-logging" %% "scala-logging" % V.scalalogging, 
+        "com.typesafe.scala-logging" %% "scala-logging" % V.scalalogging,
         "com.thesamet.scalapb" %% "compilerplugin" % V.scalapb,
         "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf",
         "io.grpc" % "grpc-netty" % scalapb.compiler.Version.grpcJavaVersion,

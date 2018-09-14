@@ -9,7 +9,8 @@ object Globals {
 
   val artpath = "v1/art"
   val songpath = "v1/song/music"
-  val rsongHostUrl: String = "http://dev-rchain.com"
+//  val rsongHostUrl: String = "http://dev-rchain.com"
+  val rsongHostUrl: String = java.net.InetAddress.getLocalHost.getHostName
   val rsongPath = "/home/kayvan/dev/assets/RCHAIN Assets"
 
 }
