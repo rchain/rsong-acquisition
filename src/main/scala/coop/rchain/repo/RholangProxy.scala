@@ -12,7 +12,7 @@ import scala.util._
 
 object RholangProxy {
 
-  val MAXGRPCSIZE = 1024 * 1024 * 100000
+  private final val MAXGRPCSIZE = 1024 * 1024 * 100000
 
   def apply(host: String, port: Int): RholangProxy = {
 
@@ -41,8 +41,8 @@ class RholangProxy(channel: ManagedChannel) {
       DeployData()
         .withTerm(contract)
         .withTimestamp(System.currentTimeMillis())
-        .withPhloLimit(0)
-        .withPhloPrice(0)
+        .withPhloLimit(coop.rchain.casper.protocol.PhloLimit(0))
+        .withPhloPrice(coop.rchain.casper.protocol.PhloPrice(0))
         .withNonce(0)
         .withFrom("0x1")
     )
