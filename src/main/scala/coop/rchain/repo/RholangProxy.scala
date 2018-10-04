@@ -12,7 +12,7 @@ import scala.util._
 
 object RholangProxy {
 
-  private final val MAXGRPCSIZE = 1024 * 1024 * 100000
+  private final val MAXGRPCSIZE = 1024 * 1024 * 500000
 
   def apply(host: String, port: Int): RholangProxy = {
 
@@ -41,8 +41,8 @@ class RholangProxy(channel: ManagedChannel) {
       DeployData()
         .withTerm(contract)
         .withTimestamp(System.currentTimeMillis())
-        .withPhloLimit(coop.rchain.casper.protocol.PhloLimit(0))
-        .withPhloPrice(coop.rchain.casper.protocol.PhloPrice(0))
+        .withPhloLimit(coop.rchain.casper.protocol.PhloLimit(1000000))
+        .withPhloPrice(coop.rchain.casper.protocol.PhloPrice(1))
         .withNonce(0)
         .withFrom("0x1")
     )
@@ -58,13 +58,16 @@ class RholangProxy(channel: ManagedChannel) {
       d <- deploy(c)
     } yield d
 
-  def proposeBlock: Either[Err, String] = {
-    val response: DeployServiceResponse = grpc.createBlock(Empty())
-    if (response.success) {
-      Right(response.message)
-    } else {
-      Left(Err(ErrorCode.grpcPropose, response.message, None))
-    }
+  def proposeBlock: Either[Err, String] =
+Try(   grpc.createBlock(Empty()) ) match {
+  case Success(response) if response.success =>
+    Right(response.message)
+  case Success(response) if ! response.success =>
+    log.error(s"grpc error. error return: ${response}")
+    Left(Err(ErrorCode.grpcPropose, response.message, None))
+  case Failure(e) =>
+    println(e)
+    Left(Err(ErrorCode.grpcPropose, e.getMessage, None))
   }
 
 }
