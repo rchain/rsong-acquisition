@@ -2,15 +2,19 @@ package coop.rchain
 
 import cats.effect._
 import cats.syntax.all._
+import com.typesafe.config.ConfigFactory
 import coop.rchain.domain._
 import coop.rchain.service.moc.MocSongMetadata.mocSongs
 import io.circe.generic.auto._
 import io.circe.syntax._
 import coop.rchain.repo.RSongRepo._
 import coop.rchain.repo.RholangProxy
-import coop.rchain.utils.Globals
+
 
 object Bootstrap extends IOApp {
+  val cfg = ConfigFactory.load("rsong-acquisition.conf")
+  val appCfg = cfg.getConfig("coop.rchain.rsong")
+  val rsongPath = "/home/kayvan/dev/assets/RCHAIN Assets"
 
   def run(args: List[String]): IO[ExitCode] =
     args.headOption match {
@@ -19,10 +23,10 @@ object Bootstrap extends IOApp {
           .as(ExitCode.Success)
 
       case Some(a) if a.equals("Deploy") =>
-        IO(aquireAssets(Globals.rsongPath)).as(ExitCode.Success)
+        IO(aquireAssets(rsongPath)).as(ExitCode.Success)
 
       case None =>
-        IO(aquireAssets(Globals.rsongPath)).as(ExitCode.Success)
+        IO(aquireAssets(rsongPath)).as(ExitCode.Success)
 
     }
   def installContract(contractFile: String) = {
@@ -39,7 +43,7 @@ object Bootstrap extends IOApp {
   }
 
   // lazy val proxy = RholangProxy("localhost", 40401)
-  lazy val proxy = RholangProxy(Globals.appCfg.getString("grpc.host"), 40401)
+  lazy val proxy = RholangProxy(appCfg.getString("grpc.host"), 40401)
 
   def aquireAssets(path: String) = {
     val ret =

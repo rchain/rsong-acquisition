@@ -2,7 +2,6 @@ package coop.rchain.repo
 
 import java.io._
 import com.typesafe.scalalogging.Logger
-import coop.rchain.utils.Globals._
 import coop.rchain.utils.HexUtil._
 import coop.rchain.domain._
 import scala.util._

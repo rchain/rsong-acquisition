@@ -4,7 +4,12 @@ import coop.rchain.domain._
 
 object MocSongMetadata {
 
-  import coop.rchain.utils.Globals._
+
+  val artpath = "v1/art"
+  val songpath = "v1/song/music"
+  //  val rsongHostUrl: String = "http://dev-rchain.com"
+  val rsongHostUrl: String = java.net.InetAddress.getLocalHost.getHostName
+
 
   val artworks = Map(
     "Broke" -> Artwork(id = "Broke",
