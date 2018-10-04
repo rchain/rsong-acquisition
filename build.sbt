@@ -44,14 +44,16 @@ lazy val root = (project in file("."))
         "ch.qos.logback" % "logback-classic" % V.logback
       )})
 
-scalacOptions in Compile ++= CompilerSettings.options
+//scalacOptions in Compile ++= CompilerSettings.options
 
 PB.targets in Compile := Seq(
   scalapb.gen() -> (sourceManaged in Compile).value)
 
-enablePlugins(JavaServerAppPackaging, BuildInfoPlugin)
-
-enablePlugins(GitVersioning)
+enablePlugins(
+  JavaServerAppPackaging,
+  GitVersioning,
+  BuildInfoPlugin
+)
 
 compileWithTodolistSettings
 
