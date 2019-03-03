@@ -61,27 +61,27 @@ object Bootstrap extends IOApp {
                         s"$path/Labels/Broke.jpg",
                         mocSongs("Broke"))
 
-        _ <- proxy.proposeBlock
-        _ <- loadeAsset("Euphoria_Immersive.izr",
-                        s"$path/Songs/Euphoria_Immersive.izr",
-                        mocSongs("Euphoria"))
-        _ <- loadeAsset("Euphoria_Stereo.izr",
-                        s"$path/Songs/Euphoria_Stereo.izr",
-                        mocSongs("Euphoria"))
-        _ <- loadeAsset("Euphoria.jpg",
-                        s"$path/Labels/Euphoria.jpg",
-                        mocSongs("Euphoria"))
-        _ <- proxy.proposeBlock
+        // _ <- proxy.proposeBlock
+        // _ <- loadeAsset("Euphoria_Immersive.izr",
+        //                 s"$path/Songs/Euphoria_Immersive.izr",
+        //                 mocSongs("Euphoria"))
+        // _ <- loadeAsset("Euphoria_Stereo.izr",
+        //                 s"$path/Songs/Euphoria_Stereo.izr",
+        //                 mocSongs("Euphoria"))
+        // _ <- loadeAsset("Euphoria.jpg",
+        //                 s"$path/Labels/Euphoria.jpg",
+        //                 mocSongs("Euphoria"))
+        // _ <- proxy.proposeBlock
 
-        _ <- loadeAsset("Tiny_Human_Immersive.izr",
-                        s"$path/Songs/Tiny_Human_Immersive.izr",
-                        mocSongs("Tiny_Human"))
-        _ <- loadeAsset("Tiny_Human_Stereo.izr",
-                        s"$path/Songs/Tiny_Human_Stereo.izr",
-                        mocSongs("Tiny_Human"))
-        _ <- loadeAsset("Tiny Human.jpg",
-                        s"$path/Labels/Tiny Human.jpg",
-                        mocSongs("Tiny_Human"))
+        // _ <- loadeAsset("Tiny_Human_Immersive.izr",
+        //                 s"$path/Songs/Tiny_Human_Immersive.izr",
+        //                 mocSongs("Tiny_Human"))
+        // _ <- loadeAsset("Tiny_Human_Stereo.izr",
+        //                 s"$path/Songs/Tiny_Human_Stereo.izr",
+        //                 mocSongs("Tiny_Human"))
+        // _ <- loadeAsset("Tiny Human.jpg",
+        //                 s"$path/Labels/Tiny Human.jpg",
+        //                 mocSongs("Tiny_Human"))
         propose <- proxy.proposeBlock
 
       } yield (propose)

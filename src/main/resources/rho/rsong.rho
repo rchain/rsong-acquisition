@@ -7,7 +7,7 @@
 // getPlaysRemaining(userid)
 
 
-new metaDataMapStore, songMapStore, userMapStore, remunerate, testLog(`rho:io:stderr`) in {
+new metaDataMapStore, songMapStore, userMapStore, remunerate, stdout(`rho:io:stdout`) in {
   // Maps songId to [metadata, songDataId]
   metaDataMapStore!({}) |
   // Maps songDataId to songData
@@ -41,7 +41,10 @@ new metaDataMapStore, songMapStore, userMapStore, remunerate, testLog(`rho:io:st
     for (@metaDataMap <- metaDataMapStore; @songMap <- songMapStore) {
       metaDataMapStore!(metaDataMap) |
       songMapStore!(songMap) |
-      songDataOut!(songMap.get(metaDataMap.get(songIdIn).nth(1)))
+      songDataOut!!(songMap.get(metaDataMap.get(songIdIn).nth(1)))
+        | for (@c <- songDataOut ){
+          stdout ! ( ["songDataOut = " , *songDataOut, "from contract song = ", c])
+        }
     }
   } |
   

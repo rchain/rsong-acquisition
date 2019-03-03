@@ -1,0 +1,7 @@
+new songOut, stdout(`rho:io:stdout`) in { 
+  @["Immersion", "retrieveSong"]!("test-id-02", "songOut") |
+  stdout ! ("trying to fetch the binary song......") |
+  for( @c <- @"songOut" ) {
+    stdout ! (c)
+  }
+}

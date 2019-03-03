@@ -12,6 +12,7 @@ object RSongRepo {
   val log = Logger("SongRepo")
 
   private def logDepth(s: String): String = {
+    println(s"+++++++++ file-length = ${s.length}")
     if (s.length <= threshold)
       s""""$s""""
     else {

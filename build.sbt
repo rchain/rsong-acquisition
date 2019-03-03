@@ -27,6 +27,7 @@ lazy val root = (project in file("."))
         val circie="0.9.3"
         val catsEffect="1.0.0"
         val monix="3.0.0-RC1"
+        val magnolia = "0.10.0"
       }
       Seq(
         "org.specs2" %% "specs2-core" % V.specs2 % "test",
@@ -39,6 +40,7 @@ lazy val root = (project in file("."))
         "com.typesafe.scala-logging" %% "scala-logging" % V.scalalogging,
         "com.thesamet.scalapb" %% "compilerplugin" % V.scalapb,
         "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf",
+        "com.propensive" %% "magnolia" % V.magnolia,
         "io.grpc" % "grpc-netty" % scalapb.compiler.Version.grpcJavaVersion,
         "com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion,
         "ch.qos.logback" % "logback-classic" % V.logback
