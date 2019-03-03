@@ -11,6 +11,9 @@ project/boot/
 project/.ensime
 .ensime*/
 .ensime
+**/TAGS
+**/.tags
+**/.bloop
 ensime_port
 .#*
 *.swp
