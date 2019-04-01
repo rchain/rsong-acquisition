@@ -1,4 +1,5 @@
 # RSong Acquisition
+## This repository is archived in favor of [rsong](https://github.com/rchain/rsong)
 A minimal utility for loading RSong binary assets to RChain.
 
 ## Caution
